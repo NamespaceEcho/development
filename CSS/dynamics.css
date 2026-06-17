@@ -1,0 +1,210 @@
+:root {
+	--animDelay: 0s;
+	
+	--characters: 17;
+	--caretHeight: 4px;
+	--caretWidth: 16px;
+	--caretColor: white;
+	
+	--textMaskGradL: black;
+	--textMaskGradR: white;
+
+	--textBackGradL: white;
+	--textBackGradR: transparent;
+	--textBackAngle: 90deg;
+}
+
+.intersecting_content {
+	opacity: 0;
+	animation: fade 0.5s var(--animDelay) linear forwards;
+}
+
+/** ROOT FADING **/
+.fade_in {
+	opacity: 0;
+	animation: fade 0.5s var(--animDelay) linear forwards;
+}
+.fade_out {
+	opacity: 1;
+	animation: fade 0.5s var(--animDelay) linear reverse forwards;
+}
+@keyframes fade {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+/** TEXT MASK **/
+@property --gradPercent {
+	syntax: '<percentage>';
+	inherits: false;
+	initial-value: 0%;
+}
+
+.text_mask::before {
+	--gradPercent: 0%;
+	content: "";
+
+	background: linear-gradient(
+		var(--textBackAngle),
+		var(--textBackGradL) var(--gradPercent),
+		var(--textBackGradR) var(--gradPercent)
+	);
+	position: absolute;
+	z-index: -1;
+
+	inset: 0px;
+	transition: --gradPercent ease 0.2s;
+	transform: skew(-5deg);
+}
+
+.text_mask {
+	--gradPercent: 0%;
+	
+	font-family: "Rajdhani_SemiBold", sans-serif;
+	color: transparent;
+
+	position: relative;
+	z-index: 1;
+	
+	background: linear-gradient(
+		var(--textBackAngle),
+		var(--textMaskGradL) var(--gradPercent),
+		var(--textMaskGradR) var(--gradPercent)
+	);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+	transition: --gradPercent ease 0.2s;
+}
+.text_mask:hover,
+.text_mask:active,
+.text_mask.active {
+	--gradPercent: 100%;
+
+	background: linear-gradient(
+		var(--textBackAngle),
+		var(--textMaskGradL) var(--gradPercent),
+		var(--textMaskGradR) var(--gradPercent)
+	);
+	background-clip: text;
+	-webkit-background-clip: text;
+}
+
+.text_mask:hover::before,
+.text_mask:active::before,
+.text_mask.active::before {
+	--gradPercent: 100%;
+	background: linear-gradient(
+		var(--textBackAngle),
+		var(--textBackGradL) var(--gradPercent),
+		var(--textBackGradR) var(--gradPercent)
+	);
+}
+
+.text_mask:hover::after,
+.text_mask:active::after,
+.text_mask.active::after {
+	transform: scaleX(1.0);
+}
+.text_mask::after {
+	content: "";
+	
+	background-color: var(--textBackGradL);
+	height: 2px;
+	width: 100%;
+
+	position: absolute;
+	
+	left: -1.5px;
+	bottom: -4px;
+	
+	transform-origin: center right;
+	transform: scaleX(0);
+	transition: transform ease 0.2s;
+}
+
+/** TYPEWRITER EFFECT **/
+div.typewriter {
+	width: min-content;
+}
+.typewriter * {
+	position: relative;
+	left: calc(var(--caretWidth) / 2);
+
+	padding-right: var(--caretWidth);
+	margin: 0px;
+
+	overflow: hidden;
+	white-space: nowrap;
+
+	animation: write 0.75s steps(var(--characters), end);
+}
+.typewriter *::after {
+	position: absolute;
+	background-color: var(--caretColor);
+	content: "";
+
+	height: var(--caretHeight);
+	width: var(--caretWidth);
+	
+	right: 0px;
+	bottom: 0px;
+
+	animation: flicker 0.5s 0.75s steps(2, end) infinite;
+}
+
+@keyframes write {
+	from {
+		width: var(--caretWidth);
+	}
+	to {
+		width: calc(100% - var(--caretWidth));
+	}
+}
+@keyframes flicker {
+	from {
+		background-color: transparent;
+	}
+	to {
+		background-color: var(--caretColor);
+	}
+}
+
+/** POINTING ARROW **/
+.arrow {
+	text-align: center;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+
+	background-color: rgba(255, 255, 255, 0.1);
+	padding: 8px;
+	margin: 8px;
+	
+	clip-path: circle(16px);
+}
+.link_arrow {
+	color: inherit;
+	text-decoration: none;
+
+	display: block;
+	padding: 8px;
+	margin: 8px;
+}
+.vertical_arrow {
+	animation: point_vertical 0.5s ease-in alternate infinite;
+}
+
+@keyframes point_vertical {
+	from {
+		transform: translateY(0px);
+	}
+	to {
+		transform: translateY(8px);
+	}
+}

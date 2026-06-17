@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="Welcome to <Namespace> Development.">
+		<meta name="keywords" content="Namespace, Development">
+		<meta name="author" content="Jesus Barajas">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Namespace Development</title>
+
+		<link href="./CSS/main.css" rel="stylesheet" type="text/css">
+		<link href="./CSS/dynamics.css" rel="stylesheet" type="text/css">
+		<link href="./CSS/interactive.css" rel="stylesheet" type="text/css">
+		<link href="./CSS/theme.css" rel="stylesheet" type="text/css">
+	</head>
+
+	<style>
+		.text_mask::before {
+			transform: skew(-5deg);
+		}
+		.text_mask::after {
+			content: "";
+			
+			background-color: var(--textBackGradL);
+			height: 2px;
+			width: 100%;
+
+			position: absolute;
+			
+			left: -1.5px;
+			bottom: -4px;
+			
+			transform-origin: center right;
+			transform: scaleX(0) skew(-5deg);
+			transition: transform ease 0.2s;
+		}
+		.text_mask:hover::after {
+			transform: scaleX(1.0) skew(-5deg);
+		}
+		.text_mask {
+			--textBackAngle: 90deg;
+			font-family: "Rajdhani_SemiBold";
+		}
+	</style>
+
+	<body class="normal">
+		<nav class="fade_in" style="--animDelay: 2.25s">
+			<a href="./index.html" class="text_mask">Home</a>
+			
+			<div class="flex_center">
+				<a href="#" class="text_mask">Bandwidth</a>
+				<a href="#" class="text_mask">Side Projects</a>
+				<a href="#" class="text_mask">Dev Logs</a>
+			</div>
+			
+			<div class="flex_center">
+				<a href="#" class="text_mask">About</a>
+				<a href="#" class="text_mask">Contact</a>
+			</div>
+		</nav>
+		
+		<main>
+			<!-- WHO AM I -->
+			<!-- WHAT I DO -->
+			<!-- MY PHILOSOPHY -->
+			
+		</main>
+	<body>
+</html>

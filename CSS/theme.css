@@ -1,0 +1,34 @@
+#leading_content {
+	color: white;
+}
+
+/*
+	* Anal Red: #ff4747
+*/
+
+/** MAIN THEME **/
+.normal {
+	--textBackGradL: #ffda74;
+}
+
+/** SPECTRAL ERA **/
+.spectral {
+	--textMaskGradR: #d6d6ff;
+	--textMaskGradL: black;
+	--textBackGradL: #7575ff;
+}
+.spectral #leading_content{
+	color: #d6d6ff;
+}
+
+/** TIMELINES SERIES **/
+.timelines {
+	--caretColor: #d4e5ff;
+
+	--textMaskGradR: #d4e5ff;
+	--textMaskGradL: #77c9ff;
+	--textBackGradL: #091555;
+}
+.timelines #leading_content{
+	color: #d4e5ff;
+}

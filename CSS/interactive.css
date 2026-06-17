@@ -1,0 +1,41 @@
+:root {
+	--galleryWidth: max(256px, 50vw);
+	--galleryHeight: max(384px, 50vh);
+}
+
+.gallery {
+	background: #00000040;
+	border-radius: 6px;
+
+	cursor: ew-resize;
+
+	margin-bottom: 4px;
+}
+
+.gallery_view {
+	position: relative;
+	display: grid;
+	grid-auto-columns: var(--galleryWidth);
+	grid-auto-flow: column;
+
+	gap: 4px;
+	padding: 4px;
+	height: var(--galleryHeight);
+
+	overflow-x: scroll;
+	overflow-y: hidden;
+
+	scroll-snap-type: x mandatory;
+	scrollbar-width: none;
+}
+
+.slide {
+	display: grid;
+	gap: 0px;
+
+	grid-template-rows: subgrid;
+	grid-row: span 3;
+
+	scroll-snap-align: center;
+	border-radius: 4px;
+}
