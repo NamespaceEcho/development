@@ -8,7 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Namespace Development</title>
 
-		<link href="./CSS/main.css" rel="stylesheet" type="text/css">
+		<link href="./CSS/base.css" rel="stylesheet" type="text/css">
 		<link href="./CSS/dynamics.css" rel="stylesheet" type="text/css">
 		<link href="./CSS/interactive.css" rel="stylesheet" type="text/css">
 	</head>
@@ -25,12 +25,30 @@
 		}
 
 		#leading_content {
+			position: relative;
 			--characters: 23;
 			--caretWidth: 1rem;
 		}
 
-		#leading_content p, #leading_content h1 {
-			filter: drop-shadow(0px 0px 8px #000000ab) drop-shadow(0px 0px 16px #000000ab);
+		#faux_border {
+			background-color: var(--themedBlack);
+			
+			position: absolute;
+			bottom: 0px;
+			left: 0px;
+			right: 0px;
+			
+			height: 8px;
+			overflow: hidden;
+
+			border-radius: 4px 4px 0px 0px;
+		}
+
+		#leading_content h1 {
+			filter: drop-shadow(0px 0px 16px var(--themedBlack)) drop-shadow(0px 0px 16px var(--themedBlack));
+		}
+		#leading_content p {
+			filter: drop-shadow(0px 0px 8px var(--themedBlack)) drop-shadow(0px 0px 8px var(--themedBlack));
 		}
 		
 		#leading_content .typewriter h1{
@@ -49,7 +67,7 @@
 		</nav>
 
 		<div id="leading_content">
-			<div class="fill_viewport center_grid" style="background-color: black; position: relative;">
+			<div class="fill_viewport center_grid" style="position: relative;">
 				<div class="fill_viewport floating_background fade_in" style="--animDelay: 2s;"></div>
 				<div>
 					<div class="typewriter">
@@ -63,54 +81,48 @@
 					<a href="#welcome" class="arrow link_arrow vertical_arrow">&DownArrow;</a>
 				</div>
 			</div>
+			<div id="faux_border"></div>
 		</div>
 		
 		<main>
-			<div id="welcome" class="view_bounds_fade">
-				<h2 style="margin: 0px; padding: 16px; text-align: center;">My Projects</h2>
+			<div id="welcome" class="content_section" style="padding-top: 0px;">
+				<section class="view_bounds_fade">
+					<div class="div_header">
+						<h2 class="text_slant">Explore My Projects</h2>
+						<h3 class="text_slant">100% Locally Sourced Mexican Labor &amp; 0% AI</h3>
+					</div>
 
-				<div class="projects_grid">
-					<div class="project_box">
-						<div class="front_side">
-							<img class="gameArt" src="./Graphics/Rise/Rise_Vertical_Capsule.png" alt="Rise Box Art">
-						</div>
-						<div class="back_side">
-							<div class="gameInfo">
-								<p>Play as a 25-year-old irish athlete who never backs down from a challenge</p>
+					<div class="projects_grid">
+						<div class="project_box">
+							<div class="front_side">
+								<img class="gameArt" src="./Graphics/Rise/Rise_Vertical_Capsule.webp" alt="Rise Box Art">
+								<div class="releaseTag comingSoon">
+									<p></p>
+								</div>
+							</div>
+							<div class="back_side">
+								<p>
+									Play as Parkour Parker, a 25-year-old redheaded Irish athlete who&apos;s trying to reach the
+									highest point of a tower by doing parkour. Each level comes with its own theme and obstacles to face.
+									Try to get as high as you can, and upload your score.
+								</p>
+								<object class="gameTrailer" data="./Graphics/Rise/Rise_Trailer.webm" type="video/webm" autoplay loop muted></object>
+								<div class="center_grid box_buttons">
+									<button>Open Steam Page</button>
+									<button>Open in Projects</button>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="project_box">
-						<div class="front_side">
-							<img class="gameArt" src="./Graphics/Rise/Rise_Vertical_Capsule.png" alt="Rise Box Art">
-						</div>
-						<div class="back_side">
-							<div class="gameInfo">
-								<p>Play as a 25-year-old irish athlete who never backs down from a challenge</p>
-							</div>
-						</div>
+				</section>
+			</div>
+			<div class="content_section">
+				<section class="view_bounds_fade">
+					<div class="div_header">
+						<h2 class="text_slant">Latest News</h2>
+						<h3 class="text_slant">Know the behind the scenes</h3>
 					</div>
-					<div class="project_box">
-						<div class="front_side">
-							<img class="gameArt" src="./Graphics/Rise/Rise_Vertical_Capsule.png" alt="Rise Box Art">
-						</div>
-						<div class="back_side">
-							<div class="gameInfo">
-								<p>Play as a 25-year-old irish athlete who never backs down from a challenge</p>
-							</div>
-						</div>
-					</div>
-					<div class="project_box">
-						<div class="front_side">
-							<img class="gameArt" src="./Graphics/Rise/Rise_Vertical_Capsule.png" alt="Rise Box Art">
-						</div>
-						<div class="back_side">
-							<div class="gameInfo">
-								<p>Play as a 25-year-old irish athlete who never backs down from a challenge</p>
-							</div>
-						</div>
-					</div>
-				</div>
+				</section>
 			</div>
 		</main>
 
@@ -120,14 +132,15 @@
 			</div>
 		</footer>
 	<body>
+		
 	<script>
-		let msgDisplay = document.getElementById("special_message");
-		let backgroundImage = document.getElementsByClassName("floating_background")[0];
+		const msgDisplay = document.getElementById("special_message");
+		const backgroundImage = document.getElementsByClassName("floating_background")[0];
 		backgroundImage.style.setProperty("background-position", `50% 75%`);
 
-		let messages =
+		const messages =
 		[
-			"'Echo' made this.",
+			"Run Parker, Run!",
 			"Earth to 'Echo'... wake up!",
 			"How many times did you reload?",
 			"I make a lot of things.",
@@ -150,15 +163,15 @@
 		];
 		
 		msgDisplay.innerText = messages[Math.floor(Math.random() * (messages.length))];
+		let scrollY = window.scrollY;
 
 		window.addEventListener("scroll", () =>
 		{
-			let scrollY = window.scrollY;
+			scrollY = window.scrollY;
 			let scrollPercent = scrollY / (document.body.scrollHeight - window.innerHeight);
 			backgroundImage.style.setProperty("background-position", `50% ${75 + scrollPercent * 25}%`);
 		});
 		
-		const viewBoundsFade = document.getElementsByClassName("view_bounds_fade");
 		const viewportPlanes = new IntersectionObserver((element) =>
 		{
 			element.forEach(i =>
@@ -166,23 +179,27 @@
 				i.target.animate(
 					[
 						{
+							transform: i.isIntersecting ? "translateY(100px)" : "translateY(0px)",
 							opacity: i.isIntersecting ? 0 : 1
 						},
 						{
+							transform: i.isIntersecting ? "translateY(0px)" : "translateY(100px)",
 							opacity: i.isIntersecting ? 1 : 0
 						}
 					],
 					{
-						duration: 500,
+						duration: 250,
+						easing: "ease",
 						fill: "forwards"
 					}
 				);
 			});
 		},
 		{
-			threshold: 0.25
+			threshold: 0.0
 		});
 		
+		const viewBoundsFade = document.getElementsByClassName("view_bounds_fade");
 		for (let i = 0; i < viewBoundsFade.length; i++) {
 			const element = viewBoundsFade[i];
 			viewportPlanes.observe(element);

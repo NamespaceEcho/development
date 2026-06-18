@@ -1,26 +1,30 @@
+:root {
+	--box-size: clamp(320px, 100vw, 512px);
+}
+
 .projects_grid {
-	display: grid;
-	grid-auto-columns: max-content;
-	grid-auto-flow: column;
+	display: flex;
+	height: max-content;
 
 	gap: 16px;
-	padding: 16px;
+	padding: 16px 4px;
 
 	overflow-x: scroll;
-	overflow-y: hidden;
+	overflow-y: visible;
 	
 	scroll-snap-type: x mandatory;
 	scrollbar-width: none;
-
-	justify-content: center;
 }
 
 .project_box {
-	position: relative;
-
-	max-width: 512px;
-	scroll-snap-align: center;
 	perspective: 3000px;
+	transform-style: preserve-3d;
+	flex: 0 0 auto;
+
+	position: relative;
+	scroll-snap-align: center;
+
+	width: calc(var(--box-size) - 32px);
 }
 .project_box:hover .front_side {
 	transform: rotateY(180deg);
@@ -29,29 +33,32 @@
 	transform: rotateY(360deg);
 }
 
-.front_side {
+.front_side, .back_side{
 	transition: transform 0.5s ease;
-	transform-style: preserve-3d;
 	backface-visibility: hidden;
+
+	border-radius: 4px;
+	overflow: hidden;
 }
 .back_side {
+	background-color: #3e00a8;
 	position: absolute;
 	inset: 0px;
 
 	opacity: 0.8;
-	transform-style: preserve-3d;
-	backface-visibility: hidden;
+
+	display: grid;
+	grid-template-rows: min-content 1fr min-content;
+	place-items: center;
 
 	transform: rotateY(180deg);
-	transition: transform 0.5s ease;
 }
 
-.gameArt {
-	max-width: 512px;
-	height: auto;
-
-	border-radius: 8px;
+img.gameArt {
+	display: block;
+	max-width: 100%;
 }
-.gameInfo {
-	text-align: center;
+
+.box_buttons {
+	gap: 8px;
 }
