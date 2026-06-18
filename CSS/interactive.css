@@ -1,41 +1,57 @@
-:root {
-	--galleryWidth: max(256px, 50vw);
-	--galleryHeight: max(384px, 50vh);
-}
-
-.gallery {
-	background: #00000040;
-	border-radius: 6px;
-
-	cursor: ew-resize;
-
-	margin-bottom: 4px;
-}
-
-.gallery_view {
-	position: relative;
+.projects_grid {
 	display: grid;
-	grid-auto-columns: var(--galleryWidth);
+	grid-auto-columns: max-content;
 	grid-auto-flow: column;
 
-	gap: 4px;
-	padding: 4px;
-	height: var(--galleryHeight);
+	gap: 16px;
+	padding: 16px;
 
 	overflow-x: scroll;
 	overflow-y: hidden;
-
+	
 	scroll-snap-type: x mandatory;
 	scrollbar-width: none;
+
+	justify-content: center;
 }
 
-.slide {
-	display: grid;
-	gap: 0px;
+.project_box {
+	position: relative;
 
-	grid-template-rows: subgrid;
-	grid-row: span 3;
-
+	max-width: 512px;
 	scroll-snap-align: center;
-	border-radius: 4px;
+	perspective: 3000px;
+}
+.project_box:hover .front_side {
+	transform: rotateY(180deg);
+}
+.project_box:hover .back_side {
+	transform: rotateY(360deg);
+}
+
+.front_side {
+	transition: transform 0.5s ease;
+	transform-style: preserve-3d;
+	backface-visibility: hidden;
+}
+.back_side {
+	position: absolute;
+	inset: 0px;
+
+	opacity: 0.8;
+	transform-style: preserve-3d;
+	backface-visibility: hidden;
+
+	transform: rotateY(180deg);
+	transition: transform 0.5s ease;
+}
+
+.gameArt {
+	max-width: 512px;
+	height: auto;
+
+	border-radius: 8px;
+}
+.gameInfo {
+	text-align: center;
 }

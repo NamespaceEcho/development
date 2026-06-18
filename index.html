@@ -11,7 +11,6 @@
 		<link href="./CSS/main.css" rel="stylesheet" type="text/css">
 		<link href="./CSS/dynamics.css" rel="stylesheet" type="text/css">
 		<link href="./CSS/interactive.css" rel="stylesheet" type="text/css">
-		<link href="./CSS/theme.css" rel="stylesheet" type="text/css">
 	</head>
 
 	<style>
@@ -24,28 +23,34 @@
 			
 			--animDelay: 1.25s;
 		}
-		
-		#leading_content .typewriter h1{
-			font-size: clamp(0.5rem, 3vw + 1rem, 3rem);
+
+		#leading_content {
 			--characters: 23;
 			--caretWidth: 1rem;
 		}
+
+		#leading_content p, #leading_content h1 {
+			filter: drop-shadow(0px 0px 8px #000000ab) drop-shadow(0px 0px 16px #000000ab);
+		}
+		
+		#leading_content .typewriter h1{
+			font-size: clamp(0.5rem, 3vw + 1rem, 3rem);
+		}
 	</style>
 
-	<body class="normal">
-		<nav class="fade_in" style="--animDelay: 2.25s">
-			<a href="./index.html" class="text_mask">Home</a>
-			
+	<body>
+		<nav class="fade_in" style="--animDelay: 2s">
 			<div class="flex_center">
-				<a href="#" class="text_mask">Rise</a>
-				<a href="#" class="text_mask">Timelines&colon; Frame of Mind</a>
+				<a href="#" class="text_mask">Home</a>
+				<a href="#" class="text_mask">Projects</a>
+				<a href="#" class="text_mask">About</a>
+				<a href="#" class="text_mask">Contact</a>
 			</div>
-			
-			<a href="#" class="text_mask">About</a>
 		</nav>
 
 		<div id="leading_content">
-			<div class="fill_view center_grid" style="background-color: black; position: relative;">
+			<div class="fill_viewport center_grid" style="background-color: black; position: relative;">
+				<div class="fill_viewport floating_background fade_in" style="--animDelay: 2s;"></div>
 				<div>
 					<div class="typewriter">
 						<h1>&lt;Namespace&gt; Development</h1>
@@ -53,7 +58,7 @@
 					<p class="fade_in" id="special_message">Run by "Echo"</p>
 				</div>
 				
-				<div class="fade_in" style="--animDelay: 2.25s; position: absolute; bottom: 32px;">
+				<div class="fade_in" style="--animDelay: 2s; position: absolute; bottom: 32px;">
 					<p>Scroll for more. DO IT!</p>
 					<a href="#welcome" class="arrow link_arrow vertical_arrow">&DownArrow;</a>
 				</div>
@@ -61,32 +66,65 @@
 		</div>
 		
 		<main>
-			<!-- WELCOME TO -->
-			<!-- SHOWCASE -->
-			<div id="welcome" class="gallery intersecting_content">
-				<div class="gallery_view">
-					<div class="slide" style="background-color: #00000040">
-						<p>Item 1</p>
-						<p>Item 1</p>
-						<button>Item 1</button>
+			<div id="welcome" class="view_bounds_fade">
+				<h2 style="margin: 0px; padding: 16px; text-align: center;">My Projects</h2>
+
+				<div class="projects_grid">
+					<div class="project_box">
+						<div class="front_side">
+							<img class="gameArt" src="./Graphics/Rise/Rise_Vertical_Capsule.png" alt="Rise Box Art">
+						</div>
+						<div class="back_side">
+							<div class="gameInfo">
+								<p>Play as a 25-year-old irish athlete who never backs down from a challenge</p>
+							</div>
+						</div>
 					</div>
-					<div class="slide" style="background-color: #00000040">
-						<p>Item 2</p>
-						<p>Item 2</p>
-						<button>Item 2</button>
+					<div class="project_box">
+						<div class="front_side">
+							<img class="gameArt" src="./Graphics/Rise/Rise_Vertical_Capsule.png" alt="Rise Box Art">
+						</div>
+						<div class="back_side">
+							<div class="gameInfo">
+								<p>Play as a 25-year-old irish athlete who never backs down from a challenge</p>
+							</div>
+						</div>
 					</div>
-					<div class="slide" style="background-color: #00000040">
-						<p>Item 3</p>
+					<div class="project_box">
+						<div class="front_side">
+							<img class="gameArt" src="./Graphics/Rise/Rise_Vertical_Capsule.png" alt="Rise Box Art">
+						</div>
+						<div class="back_side">
+							<div class="gameInfo">
+								<p>Play as a 25-year-old irish athlete who never backs down from a challenge</p>
+							</div>
+						</div>
 					</div>
-					<div class="slide" style="background-color: #00000040">
-						<p>Item 4</p>
+					<div class="project_box">
+						<div class="front_side">
+							<img class="gameArt" src="./Graphics/Rise/Rise_Vertical_Capsule.png" alt="Rise Box Art">
+						</div>
+						<div class="back_side">
+							<div class="gameInfo">
+								<p>Play as a 25-year-old irish athlete who never backs down from a challenge</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</main>
+
+		<footer>
+			<div class="flex_center">
+				<p>Copyright &copy; 2026 Namespace Development. All rights reserved.</p>
+			</div>
+		</footer>
 	<body>
 	<script>
 		let msgDisplay = document.getElementById("special_message");
+		let backgroundImage = document.getElementsByClassName("floating_background")[0];
+		backgroundImage.style.setProperty("background-position", `50% 75%`);
+
 		let messages =
 		[
 			"'Echo' made this.",
@@ -112,9 +150,16 @@
 		];
 		
 		msgDisplay.innerText = messages[Math.floor(Math.random() * (messages.length))];
+
+		window.addEventListener("scroll", () =>
+		{
+			let scrollY = window.scrollY;
+			let scrollPercent = scrollY / (document.body.scrollHeight - window.innerHeight);
+			backgroundImage.style.setProperty("background-position", `50% ${75 + scrollPercent * 25}%`);
+		});
 		
-		const intersectingContent = document.getElementsByClassName("intersecting_content");
-		const intersector = new IntersectionObserver((element) =>
+		const viewBoundsFade = document.getElementsByClassName("view_bounds_fade");
+		const viewportPlanes = new IntersectionObserver((element) =>
 		{
 			element.forEach(i =>
 			{
@@ -138,9 +183,9 @@
 			threshold: 0.25
 		});
 		
-		for (let i = 0; i < intersectingContent.length; i++) {
-			const element = intersectingContent[i];
-			intersector.observe(element);
+		for (let i = 0; i < viewBoundsFade.length; i++) {
+			const element = viewBoundsFade[i];
+			viewportPlanes.observe(element);
 		}
 	</script>
 </html>

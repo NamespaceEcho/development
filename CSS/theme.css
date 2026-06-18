@@ -8,14 +8,14 @@
 
 /** MAIN THEME **/
 .normal {
-	--textBackGradL: #ffda74;
+	--backSwipeGradL: #ffda74;
 }
 
 /** SPECTRAL ERA **/
 .spectral {
-	--textMaskGradR: #d6d6ff;
-	--textMaskGradL: black;
-	--textBackGradL: #7575ff;
+	--textFillGradR: #d6d6ff;
+	--textFillGradL: black;
+	--backSwipeGradL: #7575ff;
 }
 .spectral #leading_content{
 	color: #d6d6ff;
@@ -25,9 +25,9 @@
 .timelines {
 	--caretColor: #d4e5ff;
 
-	--textMaskGradR: #d4e5ff;
-	--textMaskGradL: #77c9ff;
-	--textBackGradL: #091555;
+	--textFillGradR: #d4e5ff;
+	--textFillGradL: #77c9ff;
+	--backSwipeGradL: #091555;
 }
 .timelines #leading_content{
 	color: #d4e5ff;

@@ -1,20 +1,20 @@
 :root {
 	--animDelay: 0s;
 	
-	--characters: 17;
+	--characters: 0;
 	--caretHeight: 4px;
 	--caretWidth: 16px;
 	--caretColor: white;
 	
-	--textMaskGradL: black;
-	--textMaskGradR: white;
+	--textFillGradL: black;
+	--textFillGradR: white;
 
-	--textBackGradL: white;
-	--textBackGradR: transparent;
-	--textBackAngle: 90deg;
+	--backSwipeGradL: white;
+	--backSwipeGradR: transparent;
+	--backSwipeAngle: 90deg;
 }
 
-.intersecting_content {
+.view_bounds_fade {
 	opacity: 0;
 	animation: fade 0.5s var(--animDelay) linear forwards;
 }
@@ -49,9 +49,9 @@
 	content: "";
 
 	background: linear-gradient(
-		var(--textBackAngle),
-		var(--textBackGradL) var(--gradPercent),
-		var(--textBackGradR) var(--gradPercent)
+		var(--backSwipeAngle),
+		var(--backSwipeGradL) var(--gradPercent),
+		var(--backSwipeGradR) var(--gradPercent)
 	);
 	position: absolute;
 	z-index: -1;
@@ -60,71 +60,43 @@
 	transition: --gradPercent ease 0.2s;
 	transform: skew(-5deg);
 }
-
 .text_mask {
 	--gradPercent: 0%;
 	
+	position: relative;
 	font-family: "Rajdhani_SemiBold", sans-serif;
 	color: transparent;
-
-	position: relative;
-	z-index: 1;
 	
 	background: linear-gradient(
-		var(--textBackAngle),
-		var(--textMaskGradL) var(--gradPercent),
-		var(--textMaskGradR) var(--gradPercent)
+		var(--backSwipeAngle),
+		var(--textFillGradL) var(--gradPercent),
+		var(--textFillGradR) var(--gradPercent)
 	);
 	background-clip: text;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
 
 	transition: --gradPercent ease 0.2s;
 }
-.text_mask:hover,
-.text_mask:active,
-.text_mask.active {
+.text_mask:hover, .text_mask:hover::before{
 	--gradPercent: 100%;
-
-	background: linear-gradient(
-		var(--textBackAngle),
-		var(--textMaskGradL) var(--gradPercent),
-		var(--textMaskGradR) var(--gradPercent)
-	);
-	background-clip: text;
-	-webkit-background-clip: text;
 }
 
-.text_mask:hover::before,
-.text_mask:active::before,
-.text_mask.active::before {
-	--gradPercent: 100%;
-	background: linear-gradient(
-		var(--textBackAngle),
-		var(--textBackGradL) var(--gradPercent),
-		var(--textBackGradR) var(--gradPercent)
-	);
-}
-
-.text_mask:hover::after,
-.text_mask:active::after,
-.text_mask.active::after {
-	transform: scaleX(1.0);
+.text_mask:hover::after{
+	transform: scaleX(1.0) skew(-5deg);
 }
 .text_mask::after {
 	content: "";
 	
-	background-color: var(--textBackGradL);
+	background-color: var(--backSwipeGradL);
 	height: 2px;
 	width: 100%;
 
 	position: absolute;
 	
-	left: -1.5px;
+	left: -1.35px;
 	bottom: -4px;
 	
 	transform-origin: center right;
-	transform: scaleX(0);
+	transform: scaleX(0) skew(-5deg);
 	transition: transform ease 0.2s;
 }
 
@@ -153,7 +125,7 @@ div.typewriter {
 	width: var(--caretWidth);
 	
 	right: 0px;
-	bottom: 0px;
+	bottom: 8px;
 
 	animation: flicker 0.5s 0.75s steps(2, end) infinite;
 }
@@ -182,7 +154,7 @@ div.typewriter {
 	-webkit-user-select: none;
 	-moz-user-select: none;
 
-	background-color: rgba(255, 255, 255, 0.1);
+	background-color: rgba(0, 0, 0, 0.5);
 	padding: 8px;
 	margin: 8px;
 	
