@@ -169,7 +169,7 @@
 		{
 			scrollY = window.scrollY;
 			let scrollPercent = scrollY / (document.body.scrollHeight - window.innerHeight);
-			backgroundImage.style.setProperty("background-position", `50% ${75 + scrollPercent * 25}%`);
+			backgroundImage.style.setProperty("background-position", `50% ${75 + scrollPercent * 5}%`);
 		});
 		
 		const viewportPlanes = new IntersectionObserver((element) =>
