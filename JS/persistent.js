@@ -15,7 +15,7 @@ navLinks.forEach(link => {
 	anchor.href = link.href;
 	anchor.textContent = link.text;
 
-	if(window.location.href.includes((link.href).split("./").pop()))
+	if(link.href == "./index.html" && window.location.href.endsWith("/") || window.location.href.includes((link.href).split("./").pop()))
 	{
 		anchor.removeAttribute("href");
 		anchor.style.cursor = "default";
@@ -42,12 +42,10 @@ footerText.textContent = "Copyright © 2026 Namespace Development. All rights re
 
 const pageInformation = document.createElement("div");
 const updateText = document.createElement("p");
-updateText.textContent = "Last Updated: June 22nd, 2026";
 updateText.style.fontSize = "0.8rem";
 updateText.style.marginTop = "0.5rem";
 
 const pageVersion = document.createElement("p");
-pageVersion.textContent = "Page Version: 1.0.3";
 pageVersion.style.fontSize = "0.8rem";
 pageVersion.style.marginTop = "0.5rem";
 

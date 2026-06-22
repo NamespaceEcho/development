@@ -87,9 +87,9 @@
 	</body>
 
 	<script src="./JS/library.js?version=1.0.2"></script>
-	<script src="./JS/persistent.js?version=1.0.1"></script>
-	<script version="1.0.3">
-		SetFooterInformation("June 22nd, 2026. 4PM CST", "1.0.3");
+	<script src="./JS/persistent.js?version=1.0.2"></script>
+	<script version="1.0.4">
+		SetFooterInformation("June 22nd, 2026. 5PM CST", "1.0.4");
 		
 		const animatedObjects = document.getElementsByClassName("animated_object");
 		const floatingBackgrounds = document.getElementsByClassName("floating_background");
@@ -124,34 +124,34 @@
 				),
 			],
 		);
-		// new ScrollingTimeline(
-		// 	document.querySelector(".timeline_root"),
-		// 	[
-		// 		new AnimatedObject(
-		// 			floatingBackgrounds[0],
-		// 			[
-		// 				new AnimationCurve("background-position-y", new Keyframe(0, 45), new Keyframe(.25, 55), "linear"),
-		// 			]
-		// 		),
-		// 		new AnimatedObject(
-		// 			floatingBackgrounds[1],
-		// 			[
-		// 				new AnimationCurve("background-position-y", new Keyframe(0.125, 45), new Keyframe(0.5, 55), "linear"),
-		// 			]
-		// 		),
-		// 		new AnimatedObject(
-		// 			floatingBackgrounds[2],
-		// 			[
-		// 				new AnimationCurve("background-position-y", new Keyframe(0.375, 45), new Keyframe(0.75, 55), "linear"),
-		// 			]
-		// 		),
-		// 		new AnimatedObject(
-		// 			floatingBackgrounds[3],
-		// 			[
-		// 				new AnimationCurve("background-position-y", new Keyframe(0.5, 45), new Keyframe(1, 55), "linear"),
-		// 			]
-		// 		),
-		// 	],
-		// );
+		new ScrollingTimeline(
+			document.querySelector(".timeline_root"),
+			[
+				new AnimatedObject(
+					floatingBackgrounds[0],
+					[
+						new AnimationCurve("background-position-y", new Keyframe(0, 49), new Keyframe(.25, 51), "linear"),
+					]
+				),
+				new AnimatedObject(
+					floatingBackgrounds[1],
+					[
+						new AnimationCurve("background-position-y", new Keyframe(0.125, 49), new Keyframe(0.5, 51), "linear"),
+					]
+				),
+				new AnimatedObject(
+					floatingBackgrounds[2],
+					[
+						new AnimationCurve("background-position-y", new Keyframe(0.375, 49), new Keyframe(0.75, 51), "linear"),
+					]
+				),
+				new AnimatedObject(
+					floatingBackgrounds[3],
+					[
+						new AnimationCurve("background-position-y", new Keyframe(0.5, 49), new Keyframe(1, 51), "linear"),
+					]
+				),
+			],
+		);
 	</script>
 </html>
