@@ -1,3 +1,6 @@
+let debugMode = false;
+let markerGaps = 20;
+
 // NewsElement - Handles the news section of the website
 class NewsElement
 {
@@ -40,6 +43,7 @@ class NewsElement
 }
 
 // ParallaxImage - Handles parallax images on the website
+// Note: This only works with images whose position is not set to "fixed" or "sticky". For these cases, use the ScrollingTimeline.
 class ParallaxImage
 {
 	self;
@@ -77,6 +81,40 @@ class ScrollingTimeline
 		this.playbackOffset = playbackOffset;
 		this.RecalculateTimeline();
 
+		if (debugMode)
+		{
+			let r = Math.random() * 255;
+			r = Math.round(r);
+			let g = Math.random() * 255;
+			g = Math.round(g);
+			let b = Math.random() * 255;
+			b = Math.round(b);
+			const scrubPlayback = document.createElement("div");
+			scrubPlayback.style.setProperty("position", "fixed");
+			scrubPlayback.style.setProperty("top", `${this.playbackOffset * 100}%`);
+			scrubPlayback.style.setProperty("left", "0px");
+			scrubPlayback.style.setProperty("width", "100%");
+			scrubPlayback.style.setProperty("height", "4px");
+			scrubPlayback.style.setProperty("z-index", "1000");
+			scrubPlayback.style.setProperty("background", `rgba(${r}, ${g}, ${b}, 0.5)`);
+			document.body.appendChild(scrubPlayback);
+
+			r = (r + 128) % 255;
+			g = (g + 128) % 255;
+			b = (b + 128) % 255;
+
+			for(let i = 0; i <= markerGaps; i++)
+			{
+				let percent = 100 / markerGaps;
+				this.#timelineElement.insertAdjacentHTML(
+					"beforeend",
+					`<div style="position: absolute; top: ${(i) * percent}%; left: 0; width: 100%; height: 1px; background: rgba(${r}, ${g}, ${b}, ${i % 2 == 1 ? 0.25 : 1}); z-index: 99;">
+						<p style="position: absolute; top: -26px; color: white; z-index: 100; text-shadow: 0px 0px 4px var(--themedBlack); font-size: 12px;">${i * percent}%</p>
+					</div>`
+				);
+			}
+		}
+
 		window.addEventListener("scroll", () => this.Evaluate());
 		window.addEventListener("resize", () => this.RecalculateTimeline());
 	}
@@ -92,12 +130,6 @@ class ScrollingTimeline
 	{
 		let scrubbedTime = MathExt.InverseLerp(this.timelineStart, this.timelineEnd, scrollY + window.innerHeight * this.playbackOffset);
 		scrubbedTime = MathExt.Clamp01(scrubbedTime);
-		console.log(
-			`Scrubbed Time: ${scrubbedTime.toFixed(2)},
-			ScrollY: ${scrollY},
-			Timeline Start: ${this.timelineStart},
-			Timeline End: ${this.timelineEnd}`
-		);
 		
 		this.#animatedObjects.forEach((animatedObject) => {
 			animatedObject.Evaluate(scrubbedTime);
@@ -117,9 +149,10 @@ class AnimatedObject
 
 	Evaluate(t)
 	{
-		this.curves.forEach((curve) => {			
+		this.curves.forEach((curve) => {	
 			const value = curve.Evaluate(t);
-			// console.log("Element: ", this.element, "Property: ", curve.property, "Value: ", value);
+			console.log(value);
+			
 
 			switch (curve.property)
 			{
@@ -134,6 +167,9 @@ class AnimatedObject
 					break;
 				case "scale":
 					this.element.style.setProperty("scale", value);
+					break;
+				case "background-position-y":
+					this.element.style.setProperty("background-position", `center ${value}%`);
 					break;
 			}
 		});
@@ -171,7 +207,11 @@ class AnimationCurve
 			case "overshoot":				
 				easingTime = MathExt.OvershootEase(x, Math.E, duration);
 				break;
+			case "cosinePowered":
+				easingTime = MathExt.PoweredCosine(x, 4, duration);
+				break;
 		}
+		
 		return MathExt.Lerp(this.startKeyframe.value, this.endKeyframe.value, easingTime);
 	}
 }
@@ -187,8 +227,21 @@ class Keyframe
 	}
 }
 
+// MathExt - A collection of math functions for animations and easing
 class MathExt
 {
+	static Clamp01(value)
+	{
+		return Math.max(0, Math.min(1, value));
+	}
+
+	static InverseLerp(a, b, value)
+	{
+		if (b - a == 0)
+			return 0;
+
+		return (value - a) / (b - a);
+	}
 	static Lerp(a, b, t)
 	{
 		return a + (b - a) * t;
@@ -200,18 +253,11 @@ class MathExt
 		t = MathExt.Clamp01(t);
 		return (1 - Math.cos(t * Math.PI)) / 2;
 	}
-
-	static InverseLerp(a, b, value)
+	static PoweredCosine(x, power = 4, duration = 1)
 	{
-		if (b - a == 0)
-			return 0;
-
-		return (value - a) / (b - a);
-	}
-
-	static Clamp01(value)
-	{
-		return Math.max(0, Math.min(1, value));
+		let t = x / duration;
+		t = MathExt.Clamp01(t);
+		return Math.pow((1 - Math.cos(t * Math.PI)) / 2, power);
 	}
 
 	static OvershootEase(x, tension = Math.E, duration = 1)

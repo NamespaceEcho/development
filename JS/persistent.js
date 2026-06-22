@@ -14,7 +14,16 @@ navLinks.forEach(link => {
 	const anchor = document.createElement("a");
 	anchor.href = link.href;
 	anchor.textContent = link.text;
-	anchor.classList.add("text_slant", "hover_slant");
+
+	if(window.location.href.includes((link.href).split("./").pop()))
+	{
+		anchor.removeAttribute("href");
+		anchor.style.cursor = "default";
+		anchor.classList.add("text_slant");
+	}
+	else
+		anchor.classList.add("text_slant", "hover_slant");
+	
 	navFlexCenter.appendChild(anchor);
 });
 
@@ -26,12 +35,33 @@ const footer = document.createElement("footer");
 footer.classList.add("footer");
 
 const flexCenter = document.createElement("div");
-flexCenter.classList.add("flex_center");
+flexCenter.classList.add("center_grid");
 
 const footerText = document.createElement("p");
 footerText.textContent = "Copyright © 2026 Namespace Development. All rights reserved.";
 
+const pageInformation = document.createElement("div");
+const updateText = document.createElement("p");
+updateText.textContent = "Last Updated: June 22nd, 2026";
+updateText.style.fontSize = "0.8rem";
+updateText.style.marginTop = "0.5rem";
+
+const pageVersion = document.createElement("p");
+pageVersion.textContent = "Page Version: 1.0.3";
+pageVersion.style.fontSize = "0.8rem";
+pageVersion.style.marginTop = "0.5rem";
+
+pageInformation.appendChild(updateText);
+pageInformation.appendChild(pageVersion);
+
 flexCenter.appendChild(footerText);
+flexCenter.appendChild(pageInformation);
 footer.appendChild(flexCenter);
 
 document.body.appendChild(footer);
+
+function SetFooterInformation(updateTime, version)
+{
+	updateText.textContent = "Last Updated:" + updateTime;
+	pageVersion.textContent = "Page Version: " + version;
+}

@@ -54,6 +54,42 @@
 			#leading_content .typewriter h1{
 				font-size: clamp(0.5rem, 3vw + 1rem, 3rem);
 			}
+
+			#article_overlay {
+				display: none;
+
+				position: fixed;
+				inset: 0px;
+				z-index: 2;
+				
+				width: 100%;
+				height: 100%;
+			}
+			#close_button {
+				display: none;
+
+				position: fixed;
+				z-index: 3;
+				top: 12px;
+				right: 12px;
+
+				background-color: red;
+				box-shadow: 0px 4px 8px rgba(from var(--themedBlack) r g b / 0.5);
+				color: white;
+				border: none;
+				border-radius: 4px;
+
+				padding: 4px 8px;
+			}
+
+			@keyframes scaleUp {
+				from{
+					scale: 0;
+				}
+				to {
+					scale: 1;
+				}
+			}
 		</style>
 	</head>
 
@@ -76,6 +112,10 @@
 			<div id="faux_border"></div>
 		</div>
 		
+		<object id="article_overlay" data="">
+		</object>
+		<button id="close_button">X</button>
+
 		<main class="timeline_root">
 			<div id="projects" class="content_section">
 				<div class="animated_object">
@@ -123,12 +163,13 @@
 		</main>
 	</body>
 	
-	<script src="./JS/library.js"></script>
-	<script src="./JS/persistent.js"></script>
-	<script	version="1.0.2">
+	<script src="./JS/library.js?version=1.0.2"></script>
+	<script src="./JS/persistent.js?version=1.0.1"></script>
+	<script	version="1.0.4">
+		SetFooterInformation("June 22nd, 2026. 4PM CST", "1.0.4");
 		navigation.style.setProperty("--animDelay", "2s");
 		navigation.classList.add("fade_in");
-
+		
 		// RESET SCROLL
 		setTimeout(() => {
 			window.scrollTo(0, 0);
@@ -181,13 +222,23 @@
 		
 		// NEWS SECTION
 		const newsList = document.getElementsByClassName("limited_List")[0];
+		const articleOverlay = document.getElementById("article_overlay");
+		const closeButton = document.getElementById("close_button");
+		closeButton.addEventListener("click", () => {
+			articleOverlay.style.display = "none";
+			closeButton.style.display = "none";
+		});
+		
 		new NewsElement(
 			"Namespace Development website is now live!",
-			"Welcome to the website created with 100% locally sourced Mexican labor, and 0% AI!",
+			"Welcome to the website created with 100% locally sourced Mexican labor, and 0% AI Slop!",
 			["website"],
 			newsList,
 			() => {
-				// alert("Orion likes it up his ass, mff~");
+				articleOverlay.data = "./News/website_live.html";
+				articleOverlay.style.display = "block";
+				articleOverlay.style.animation = "scaleUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)";
+				closeButton.style.display = "block";
 			}
 		);
 		new NewsElement(
@@ -196,8 +247,7 @@
 			["social"],
 			newsList,
 			() => {
-				// alert("Orion likes it up his ass, mff~");
-				// window.open("https://twitter.com/NamespaceEcho", "_blank");
+				window.open("https://twitter.com/NamespaceEcho", "_blank");
 			}
 		);
 
@@ -214,7 +264,7 @@
 				new AnimatedObject(
 					animatedObjects[1],
 					[
-						new AnimationCurve("opacity", new Keyframe(0.8, 0), new Keyframe(0.9, 1), "linear"),
+						new AnimationCurve("opacity", new Keyframe(0.7, 0), new Keyframe(0.9, 1), "linear"),
 					]
 				),
 			],

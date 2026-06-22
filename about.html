@@ -27,19 +27,30 @@
 				bottom: 12px;
 				right:  10px;
 			}
-
+			
 			.floating_background {
-				opacity: 0.9;
+				opacity: 0.8;
+			}
+
+			.animated_object {
+				background-color: var(--themedBlack);
 			}
 
 			.content_section {
 				text-align: center;
 			}
+
+			nav {
+				z-index: 10;
+			}
 		</style>
 	</head>
 
 	<body>
-		<main class="timeline_root">
+		<span class="timeline_root" style="position: absolute; inset: 48px 0px 0px 0px; display: block;">
+		</span>
+
+		<main style="height: 600vh;">
 			<div class="content_section fill_viewport center_grid animated_object">
 				<div class="floating_background" style=" --floatingImage: url('../Graphics/Alias/Echo_Daydreaming_kolvonposting.webp');"></div>
 				<div>
@@ -64,7 +75,7 @@
 					good, honest, and trusting relationship with our players.
 				</p>
 			</div>
-			<div class="content_section fill_viewport center_grid">
+			<div class="content_section fill_viewport center_grid" style="position: sticky; top: 0px;">
 				<div class="floating_background" style="--floatingImage: url('../Graphics/Alias/Echo_Daydreaming_kolvonposting.webp');"></div>
 				<h2 class="floating_major_title_shadow">Meet <span class="text_slant" style="padding: 0px 8px;">NamespaceEcho</span></h2>
 				<p class="floating_paragraph_shadow">
@@ -75,58 +86,72 @@
 		</main>
 	</body>
 
-	<script src="./JS/library.js"></script>
-	<script src="./JS/persistent.js"></script>
-	<script version="1.0.2">
-		let parallaxImage = [];
-		// PARALLAX CONTROL
-		for (let img of document.getElementsByClassName("floating_background"))
-		{
-			parallaxImage.push(new ParallaxImage(
-				img,
-				50,
-				50
-			));
-		}
-		window.addEventListener("scroll", () =>
-		{
-			let i = 0;
-			parallaxImage.forEach(element => {
-				let a = element.self.getBoundingClientRect().top + scrollY;
-				let b = a + element.self.clientHeight;
-				let normal = (scrollY - a) / (b - a);
-
-				element.ScrollImage(normal);
-				i++;
-			});
-		});
+	<script src="./JS/library.js?version=1.0.2"></script>
+	<script src="./JS/persistent.js?version=1.0.1"></script>
+	<script version="1.0.3">
+		SetFooterInformation("June 22nd, 2026. 4PM CST", "1.0.3");
 		
 		const animatedObjects = document.getElementsByClassName("animated_object");
+		const floatingBackgrounds = document.getElementsByClassName("floating_background");
+		for(let i = 0; i < animatedObjects.length; i++)
+		{
+			animatedObjects[i].style.zIndex = animatedObjects.length - i;
+			animatedObjects[i].style.position = "fixed";
+			animatedObjects[i].style.top = "0px";
+			animatedObjects[i].style.inset = "0px";
+		}
+
 		new ScrollingTimeline(
 			document.querySelector(".timeline_root"),
 			[
 				new AnimatedObject(
 					animatedObjects[0],
 					[
-						new AnimationCurve("opacity", new Keyframe(0, 1), new Keyframe(0.25, 0), "linear"),
-						new AnimationCurve("translate", new Keyframe(0, 0), new Keyframe(0.25, 200), "cosined"),
+						new AnimationCurve("opacity", new Keyframe(0, 1), new Keyframe(0.25, 0), "cosinePowered"),
 					]
 				),
 				new AnimatedObject(
 					animatedObjects[1],
 					[
-						new AnimationCurve("opacity", new Keyframe(0.25, 1), new Keyframe(0.5, 0), "linear"),
-						new AnimationCurve("translate", new Keyframe(0.25, 0), new Keyframe(0.5, 200), "cosined"),
+						new AnimationCurve("opacity", new Keyframe(0.25, 1), new Keyframe(0.5, 0), "cosinePowered"),
 					]
 				),
 				new AnimatedObject(
 					animatedObjects[2],
 					[
-						new AnimationCurve("opacity", new Keyframe(0.5, 1), new Keyframe(0.75, 0), "linear"),
-						new AnimationCurve("translate", new Keyframe(0.5, 0), new Keyframe(0.75, 200), "cosined"),
+						new AnimationCurve("opacity", new Keyframe(0.5, 1), new Keyframe(0.75, 0), "cosinePowered"),
 					]
 				),
-			]
+			],
+		);
+		new ScrollingTimeline(
+			document.querySelector(".timeline_root"),
+			[
+				new AnimatedObject(
+					floatingBackgrounds[0],
+					[
+						new AnimationCurve("background-position-y", new Keyframe(0, 45), new Keyframe(.25, 55), "linear"),
+					]
+				),
+				new AnimatedObject(
+					floatingBackgrounds[1],
+					[
+						new AnimationCurve("background-position-y", new Keyframe(0.125, 45), new Keyframe(0.5, 55), "linear"),
+					]
+				),
+				new AnimatedObject(
+					floatingBackgrounds[2],
+					[
+						new AnimationCurve("background-position-y", new Keyframe(0.375, 45), new Keyframe(0.75, 55), "linear"),
+					]
+				),
+				new AnimatedObject(
+					floatingBackgrounds[3],
+					[
+						new AnimationCurve("background-position-y", new Keyframe(0.5, 45), new Keyframe(1, 55), "linear"),
+					]
+				),
+			],
 		);
 	</script>
 </html>

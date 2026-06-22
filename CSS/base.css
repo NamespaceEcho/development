@@ -219,7 +219,6 @@ nav .flex_center {
 	background-clip: text !important;
 }
 
-
 .floating_major_title_shadow {
 	filter: drop-shadow(0px 2px 4px var(--textShadowColor))
 			drop-shadow(0px 2px 4px var(--textShadowColor));
