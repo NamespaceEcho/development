@@ -1,5 +1,6 @@
 :root {
-	--box-size: clamp(320px, 100vw, 512px);
+	--box-size: clamp(320px, 100vw, 480px);
+	--boxBack: url("../Graphics/Rise/Rise_Alpha.webp");
 }
 
 .projects_grid {
@@ -25,6 +26,7 @@
 	scroll-snap-align: center;
 
 	width: calc(var(--box-size) - 32px);
+	/* transform: rotateY(180deg); */
 }
 .project_box:hover .front_side {
 	transform: rotateY(180deg);
@@ -39,19 +41,28 @@
 
 	border-radius: 4px;
 	overflow: hidden;
+
+	border: solid 2px var(--themedOutline);
 }
 .back_side {
-	background-color: #3e00a8;
-	position: absolute;
-	inset: 0px;
-
-	opacity: 0.8;
+	background-image: var(--boxBack);
+	background-size: contain;
+	background-position: center;
 
 	display: grid;
 	grid-template-rows: min-content 1fr min-content;
 	place-items: center;
 
+	position: absolute;
 	transform: rotateY(180deg);
+	inset: 0px;
+}
+.short_description {
+	background-color: rgba(from var(--themedBlack) r g b / 0.8);
+	backdrop-filter: blur(8px);
+
+	margin: 0px;
+	padding: 12px;
 }
 
 img.gameArt {

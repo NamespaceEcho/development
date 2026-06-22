@@ -1,69 +1,132 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<meta name="description" content="Welcome to <Namespace> Development.">
-		<meta name="keywords" content="Namespace, Development">
+		<meta name="description" content="About Namespace Development.">
+		<meta name="keywords" content="Namespace, Development, Rise, Parkour Parker, About">
 		<meta name="author" content="Jesus Barajas">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Namespace Development</title>
+		<title>About Namespace</title>
 
-		<link href="./CSS/main.css" rel="stylesheet" type="text/css">
-		<link href="./CSS/dynamics.css" rel="stylesheet" type="text/css">
-		<link href="./CSS/interactive.css" rel="stylesheet" type="text/css">
-		<link href="./CSS/theme.css" rel="stylesheet" type="text/css">
+		<link href="./CSS/base.css?version=1.0.1" rel="stylesheet" type="text/css">
+		<link href="./CSS/dynamics.css?version=1.0.1" rel="stylesheet" type="text/css">
+		<link href="./CSS/interactive.css?version=1.0.0" rel="stylesheet" type="text/css">
+		
+		<style>
+			h2 {
+				width: max-content;
+				margin: auto;
+			}
+
+			.graphic_credit {
+				color: white;
+				position: absolute;
+
+				transform-origin: bottom right;
+
+				bottom: 12px;
+				right:  10px;
+			}
+
+			.floating_background {
+				opacity: 0.9;
+			}
+
+			.content_section {
+				text-align: center;
+			}
+		</style>
 	</head>
 
-	<style>
-		.text_mask::before {
-			transform: skew(-5deg);
-		}
-		.text_mask::after {
-			content: "";
-			
-			background-color: var(--textBackGradL);
-			height: 2px;
-			width: 100%;
-
-			position: absolute;
-			
-			left: -1.5px;
-			bottom: -4px;
-			
-			transform-origin: center right;
-			transform: scaleX(0) skew(-5deg);
-			transition: transform ease 0.2s;
-		}
-		.text_mask:hover::after {
-			transform: scaleX(1.0) skew(-5deg);
-		}
-		.text_mask {
-			--textBackAngle: 90deg;
-			font-family: "Rajdhani_SemiBold";
-		}
-	</style>
-
-	<body class="normal">
-		<nav class="fade_in" style="--animDelay: 2.25s">
-			<a href="./index.html" class="text_mask">Home</a>
-			
-			<div class="flex_center">
-				<a href="#" class="text_mask">Bandwidth</a>
-				<a href="#" class="text_mask">Side Projects</a>
-				<a href="#" class="text_mask">Dev Logs</a>
-			</div>
-			
-			<div class="flex_center">
-				<a href="#" class="text_mask">About</a>
-				<a href="#" class="text_mask">Contact</a>
-			</div>
-		</nav>
-		
-		<main>
-			<!-- WHO AM I -->
-			<!-- WHAT I DO -->
-			<!-- MY PHILOSOPHY -->
-			
-		</main>
 	<body>
+		<main class="timeline_root">
+			<div class="content_section fill_viewport center_grid animated_object">
+				<div class="floating_background" style=" --floatingImage: url('../Graphics/Alias/Echo_Daydreaming_kolvonposting.webp');"></div>
+				<div>
+					<h1><span class="floating_major_title_shadow text_slant" style="padding: 0px 12px 0px 6px;">&lt;Namespace&gt; Development</span> </h1>
+					<h3 class="floating_paragraph_shadow">We are an independent game development studio, run by "NamespaceEcho".</h3>
+				</div>
+				<a href="https://x.com/kolposting" target="_blank" class="floating_paragraph_shadow graphic_credit">Art by Kolvon</a>
+			</div>
+			<div class="content_section fill_viewport center_grid animated_object">
+				<div class="floating_background" style="--floatingImage: url('../Graphics/Alias/Echo_Daydreaming_kolvonposting.webp');"></div>
+				<h2><span class="floating_major_title_shadow text_slant" style="padding: 0px 8px;">Our Mission</span></h2>
+				<p class="floating_paragraph_shadow">
+					Creating fun, engaging, 100% human made games for the players. Not AI or poorly optimized AAA slop.
+				</p>
+			</div>
+			<div class="content_section fill_viewport center_grid animated_object">
+				<div class="floating_background" style="--floatingImage: url('../Graphics/Alias/Echo_Daydreaming_kolvonposting.webp');"></div>
+				<h2><span class="floating_major_title_shadow text_slant" style="padding: 0px 8px;">Our Values</span></h2>
+				<p class="floating_paragraph_shadow">
+					We believe in creating games that are fun and engaging for the players,
+					and we believe in being successful because of the players. We also believe in having a 
+					good, honest, and trusting relationship with our players.
+				</p>
+			</div>
+			<div class="content_section fill_viewport center_grid">
+				<div class="floating_background" style="--floatingImage: url('../Graphics/Alias/Echo_Daydreaming_kolvonposting.webp');"></div>
+				<h2 class="floating_major_title_shadow">Meet <span class="text_slant" style="padding: 0px 8px;">NamespaceEcho</span></h2>
+				<p class="floating_paragraph_shadow">
+					The founder and lead developer of Namespace Development. Usually running on his own,
+					but sometimes with help from friends. He has been making games for over 10 years.
+				</p>
+			</div>
+		</main>
+	</body>
+
+	<script src="./JS/library.js"></script>
+	<script src="./JS/persistent.js"></script>
+	<script version="1.0.0">
+		let parallaxImage = [];
+		// PARALLAX CONTROL
+		for (let img of document.getElementsByClassName("floating_background"))
+		{
+			parallaxImage.push(new ParallaxImage(
+				img,
+				50,
+				50
+			));
+		}
+		window.addEventListener("scroll", () =>
+		{
+			let i = 0;
+			parallaxImage.forEach(element => {
+				let a = element.self.getBoundingClientRect().top + scrollY;
+				let b = a + element.self.clientHeight;
+				let normal = (scrollY - a) / (b - a);
+
+				element.ScrollImage(normal);
+				i++;
+			});
+		});
+		
+		const animatedObjects = document.getElementsByClassName("animated_object");
+		new ScrollingTimeline(
+			document.querySelector(".timeline_root"),
+			[
+				new AnimatedObject(
+					animatedObjects[0],
+					[
+						new AnimationCurve("opacity", new Keyframe(0, 1), new Keyframe(0.25, 0), "linear"),
+						new AnimationCurve("translate", new Keyframe(0, 0), new Keyframe(0.25, 200), "cosined"),
+					]
+				),
+				new AnimatedObject(
+					animatedObjects[1],
+					[
+						new AnimationCurve("opacity", new Keyframe(0.25, 1), new Keyframe(0.5, 0), "linear"),
+						new AnimationCurve("translate", new Keyframe(0.25, 0), new Keyframe(0.5, 200), "cosined"),
+					]
+				),
+				new AnimatedObject(
+					animatedObjects[2],
+					[
+						new AnimationCurve("opacity", new Keyframe(0.5, 1), new Keyframe(0.75, 0), "linear"),
+						new AnimationCurve("translate", new Keyframe(0.5, 0), new Keyframe(0.75, 200), "cosined"),
+					]
+				),
+			]
+		);
+	</script>
 </html>

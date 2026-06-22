@@ -1,94 +1,86 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="description" content="Welcome to Namespace Development.">
-		<meta name="keywords" content="Namespace, Development">
+		<meta name="keywords" content="Namespace, Development, Rise, Parkour Parker">
 		<meta name="author" content="Jesus Barajas">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Namespace Development</title>
 
-		<link href="./CSS/base.css" rel="stylesheet" type="text/css">
-		<link href="./CSS/dynamics.css" rel="stylesheet" type="text/css">
-		<link href="./CSS/interactive.css" rel="stylesheet" type="text/css">
+		<link href="./CSS/base.css?version=1.0.1" rel="stylesheet" type="text/css">
+		<link href="./CSS/dynamics.css?version=1.0.1" rel="stylesheet" type="text/css">
+		<link href="./CSS/interactive.css?version=1.0.0" rel="stylesheet" type="text/css">
+
+		<style>
+			#special_message {
+				text-align: left;
+				font-size: clamp(0.5rem, 3vw, 1rem);
+				
+				margin: 0px;
+				margin-left: 36px;
+				
+				--animDelay: 1.25s;
+			}
+
+			#leading_content {
+				position: relative;
+				--characters: 23;
+				--caretWidth: 1rem;
+			}
+
+			#faux_border {
+				background-color: var(--themedBlack);
+				
+				position: absolute;
+				bottom: 0px;
+				left: 0px;
+				right: 0px;
+				
+				height: 4px;
+				border-radius: 4px 4px 0px 0px;
+				overflow: hidden;
+
+				/* clip-path: polygon(
+					0% 0%,
+					0% 100%,
+					100% 100%,
+					100% 0%,
+					calc(100% - 10px) 100%,
+					10px 100%
+				); */
+			}
+			
+			#leading_content .typewriter h1{
+				font-size: clamp(0.5rem, 3vw + 1rem, 3rem);
+			}
+		</style>
 	</head>
 
-	<style>
-		#special_message {
-			text-align: left;
-			font-size: clamp(0.5rem, 3vw, 1rem);
-			
-			margin: 0px;
-			margin-left: 36px;
-			
-			--animDelay: 1.25s;
-		}
-
-		#leading_content {
-			position: relative;
-			--characters: 23;
-			--caretWidth: 1rem;
-		}
-
-		#faux_border {
-			background-color: var(--themedBlack);
-			
-			position: absolute;
-			bottom: 0px;
-			left: 0px;
-			right: 0px;
-			
-			height: 8px;
-			overflow: hidden;
-
-			border-radius: 4px 4px 0px 0px;
-		}
-
-		#leading_content h1 {
-			filter: drop-shadow(0px 0px 16px var(--themedBlack)) drop-shadow(0px 0px 16px var(--themedBlack));
-		}
-		#leading_content p {
-			filter: drop-shadow(0px 0px 8px var(--themedBlack)) drop-shadow(0px 0px 8px var(--themedBlack));
-		}
-		
-		#leading_content .typewriter h1{
-			font-size: clamp(0.5rem, 3vw + 1rem, 3rem);
-		}
-	</style>
-
 	<body>
-		<nav class="fade_in" style="--animDelay: 2s">
-			<div class="flex_center">
-				<a href="#" class="text_mask">Home</a>
-				<a href="#" class="text_mask">Projects</a>
-				<a href="#" class="text_mask">About</a>
-				<a href="#" class="text_mask">Contact</a>
-			</div>
-		</nav>
-
 		<div id="leading_content">
-			<div class="fill_viewport center_grid" style="position: relative;">
+			<div class="fill_viewport center_grid">
 				<div class="fill_viewport floating_background fade_in" style="--animDelay: 2s;"></div>
 				<div>
-					<div class="typewriter">
+					<div class="typewriter floating_major_title_shadow">
 						<h1>&lt;Namespace&gt; Development</h1>
 					</div>
-					<p class="fade_in" id="special_message">Run by "Echo"</p>
+					<p class="fade_in floating_paragraph_shadow" id="special_message">Run by "Echo"</p>
 				</div>
 				
-				<div class="fade_in" style="--animDelay: 2s; position: absolute; bottom: 32px;">
+				<div class="fade_in floating_paragraph_shadow" style="--animDelay: 2s; position: absolute; bottom: 32px;">
 					<p>Scroll for more. DO IT!</p>
-					<a href="#welcome" class="arrow link_arrow vertical_arrow">&DownArrow;</a>
+					<a href="#projects" class="arrow link_arrow vertical_arrow">&DownArrow;</a>
 				</div>
 			</div>
 			<div id="faux_border"></div>
 		</div>
 		
-		<main>
-			<div id="welcome" class="content_section" style="padding-top: 0px;">
-				<section class="view_bounds_fade">
+		<main class="timeline_root">
+			<div id="projects" class="content_section">
+				<div class="animated_object">
 					<div class="div_header">
-						<h2 class="text_slant">Explore My Projects</h2>
+						<h2 class="text_slant">Latest Projects</h2>
 						<h3 class="text_slant">100% Locally Sourced Mexican Labor &amp; 0% AI</h3>
 					</div>
 
@@ -101,12 +93,12 @@
 								</div>
 							</div>
 							<div class="back_side">
-								<p>
-									Play as Parkour Parker, a 25-year-old redheaded Irish athlete who&apos;s trying to reach the
-									highest point of a tower by doing parkour. Each level comes with its own theme and obstacles to face.
-									Try to get as high as you can, and upload your score.
+								<p class="short_description">
+									Play as Parkour Parker, a 25-year-old, redheaded, Irish athlete who&apos;s a clutz,
+									yet has a knack for never backing down from a challenge. His latest challenge:
+									Climbing the tallest towers as high as he can, until he can&apos;t anymore.
 								</p>
-								<object class="gameTrailer" data="./Graphics/Rise/Rise_Trailer.webm" type="video/webm" autoplay loop muted></object>
+								<!-- <object class="gameTrailer" data="./Graphics/Rise/Rise_Trailer.webm" type="video/webm" autoplay loop muted></object> -->
 								<div class="center_grid box_buttons">
 									<button>Open Steam Page</button>
 									<button>Open in Projects</button>
@@ -114,30 +106,41 @@
 							</div>
 						</div>
 					</div>
-				</section>
+				</div>
 			</div>
 			<div class="content_section">
-				<section class="view_bounds_fade">
+				<div class="animated_object">
 					<div class="div_header">
 						<h2 class="text_slant">Latest News</h2>
-						<h3 class="text_slant">Know the behind the scenes</h3>
+						<h3 class="text_slant">Know what&apos;s up with us.</h3>
 					</div>
-				</section>
+
+					<div class="limited_List">
+						
+					</div>
+				</div>
 			</div>
 		</main>
+	</body>
+	
+	<script src="./JS/library.js"></script>
+	<script src="./JS/persistent.js"></script>
+	<script	version="1.0.0">
+		navigation.style.setProperty("--animDelay", "2s");
+		navigation.classList.add("fade_in");
 
-		<footer>
-			<div class="flex_center">
-				<p>Copyright &copy; 2026 Namespace Development. All rights reserved.</p>
-			</div>
-		</footer>
-	<body>
-		
-	<script>
+		// RESET SCROLL
+		setTimeout(() => {
+			window.scrollTo(0, 0);
+		}, 100);
+
+		document.body.style.setProperty("overflow-y", "hidden");
+		setTimeout(() => {
+			document.body.style.setProperty("overflow-y", "scroll");
+		}, 2500);
+
+		// RANDOM MESSAGE
 		const msgDisplay = document.getElementById("special_message");
-		const backgroundImage = document.getElementsByClassName("floating_background")[0];
-		backgroundImage.style.setProperty("background-position", `50% 75%`);
-
 		const messages =
 		[
 			"Run Parker, Run!",
@@ -161,48 +164,61 @@
 			"On a RAM diet.",
 			"This site is not Vegan.",
 		];
-		
 		msgDisplay.innerText = messages[Math.floor(Math.random() * (messages.length))];
-		let scrollY = window.scrollY;
-
+		
+		// PARALLAX CONTROL
+		const backgroundImage = new ParallaxImage(
+			document.getElementsByClassName("floating_background")[0],
+			50,
+			75
+		);
 		window.addEventListener("scroll", () =>
 		{
-			scrollY = window.scrollY;
+			let scrollY = window.scrollY;
 			let scrollPercent = scrollY / (document.body.scrollHeight - window.innerHeight);
-			backgroundImage.style.setProperty("background-position", `50% ${75 + scrollPercent * 5}%`);
+			backgroundImage.ScrollImage(scrollPercent);
 		});
 		
-		const viewportPlanes = new IntersectionObserver((element) =>
-		{
-			element.forEach(i =>
-			{
-				i.target.animate(
+		// NEWS SECTION
+		const newsList = document.getElementsByClassName("limited_List")[0];
+		new NewsElement(
+			"Namespace Development website is now live!",
+			"Welcome to the website created with 100% locally sourced Mexican labor, and 0% AI!",
+			["website"],
+			newsList,
+			() => {
+				// alert("Orion likes it up his ass, mff~");
+			}
+		);
+		new NewsElement(
+			"Namespace Development is now on Twitter!",
+			"Follow us on Twitter to stay updated with the latest news and announcements about our projects.",
+			["social"],
+			newsList,
+			() => {
+				// alert("Orion likes it up his ass, mff~");
+				// window.open("https://twitter.com/NamespaceEcho", "_blank");
+			}
+		);
+
+		const animatedObjects = document.getElementsByClassName("animated_object");
+		new ScrollingTimeline(
+			document.querySelector(".timeline_root"),
+			[
+				new AnimatedObject(
+					animatedObjects[0],
 					[
-						{
-							transform: i.isIntersecting ? "translateY(100px)" : "translateY(0px)",
-							opacity: i.isIntersecting ? 0 : 1
-						},
-						{
-							transform: i.isIntersecting ? "translateY(0px)" : "translateY(100px)",
-							opacity: i.isIntersecting ? 1 : 0
-						}
-					],
-					{
-						duration: 250,
-						easing: "ease",
-						fill: "forwards"
-					}
-				);
-			});
-		},
-		{
-			threshold: 0.0
-		});
-		
-		const viewBoundsFade = document.getElementsByClassName("view_bounds_fade");
-		for (let i = 0; i < viewBoundsFade.length; i++) {
-			const element = viewBoundsFade[i];
-			viewportPlanes.observe(element);
-		}
+						new AnimationCurve("opacity", new Keyframe(0, 0), new Keyframe(0.4, 1), "linear"),
+					]
+				),
+				new AnimatedObject(
+					animatedObjects[1],
+					[
+						new AnimationCurve("opacity", new Keyframe(0.8, 0), new Keyframe(0.9, 1), "linear"),
+					]
+				),
+			],
+			1
+		);
 	</script>
 </html>

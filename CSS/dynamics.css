@@ -6,17 +6,12 @@
 	--caretWidth: 16px;
 	--caretColor: white;
 	
-	--textFillGradL: var(--themedBlack);
-	--textFillGradR: white;
+	--textFillGradB: var(--themedBlack);
+	--textFillGradA: white;
 
 	--backSwipeGradL: white;
 	--backSwipeGradR: transparent;
 	--backSwipeAngle: 90deg;
-}
-
-.view_bounds_fade {
-	opacity: 0;
-	animation: fade 0.5s var(--animDelay) linear forwards;
 }
 
 /** ROOT FADING **/
@@ -44,59 +39,41 @@
 	initial-value: 0%;
 }
 
-.text_mask::before, .text_slant::before {
+.text_slant.hover_slant::before {
 	--gradPercent: 0%;
-	content: "";
 
 	background: linear-gradient(
 		var(--backSwipeAngle),
 		var(--backSwipeGradL) var(--gradPercent),
 		var(--backSwipeGradR) var(--gradPercent)
 	);
-	position: absolute;
-	z-index: -1;
-
-	inset: 0px;
-	transition: --gradPercent ease 0.2s;
-	transform: skew(-5deg);
-}
-.text_mask, .text_slant {
-	--gradPercent: 0%;
-	
-	position: relative;
-	font-family: "Rajdhani_SemiBold", sans-serif;
-	color: transparent;
-	
-	background: linear-gradient(
-		var(--backSwipeAngle),
-		var(--textFillGradL) var(--gradPercent),
-		var(--textFillGradR) var(--gradPercent)
-	);
-	background-clip: text;
 
 	transition: --gradPercent ease 0.2s;
 }
-.text_mask::after, .text_slant::after {
-	content: "";
+.text_slant.hover_slant::after {
+	--gradPercent: 100%;
+	background: var(--slantBackground);
 	
-	background-color: var(--backSwipeGradL);
-	height: 2px;
-	width: 100%;
-
-	position: absolute;
-	
-	left: -1.35px;
-	bottom: -4px;
-	
-	transform-origin: center right;
 	transform: scaleX(0) skew(-5deg);
 	transition: transform ease 0.2s;
 }
+.text_slant.hover_slant {
+	--gradPercent: 0%;
+	
+	background: linear-gradient(
+		var(--backSwipeAngle),
+		var(--textFillGradB) var(--gradPercent),
+		var(--textFillGradA) var(--gradPercent)
+	);
 
-.text_mask:hover, .text_mask:hover::before, .text_slant, .text_slant::before, .text_mask::after{
+	transition: --gradPercent ease 0.2s;
+}
+
+.text_slant.hover_slant:hover,
+.text_slant.hover_slant:hover::before {
 	--gradPercent: 100%;
 }
-.text_mask:hover::after, .text_slant::after {
+.text_slant.hover_slant:hover::after {
 	transform: scaleX(1.0) skew(-5deg);
 }
 

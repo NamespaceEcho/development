@@ -1,12 +1,21 @@
 * {
 	font-family: "Rajdhani";
+	scrollbar-width: thin;
+	scrollbar-color: white transparent;
 }
-
 :root {
 	--padding: 4px;
 	--curve: 8px;
 	--radius: calc(var(--curve) - var(--padding));
+
 	--themedBlack: #00001c;
+	--themedLighter: #09093a;
+	--themedOutline: #131356;
+	--slantText: #00001c;
+	--slantBackground: white;
+	
+	--floatingImage: url("../Graphics/Rise/Rise_Art_1_0_0.webp");
+	--textShadowColor: rgba(from var(--themedBlack) r g b / 0.6);
 }
 html {
 	scroll-behavior: smooth;
@@ -19,6 +28,8 @@ body {
 
 	margin: 0px;
 	padding: 0px;
+
+	overflow-x: hidden;
 }
 footer {
 	background-color: #09093a;
@@ -50,6 +61,7 @@ button {
 }
 
 nav {
+	background-color: rgb(from var(--themedBlack) r g b / 0.5);
 	backdrop-filter: blur(10px);
 
 	position: fixed;
@@ -92,7 +104,7 @@ nav .flex_center {
 /* --- CONTENT HEADERS --- */
 .div_header {
 	display: flex;
-	gap: 1px;
+	gap: 1.5px;
 
 	margin: 4px;
 	margin-bottom: 0px;
@@ -104,6 +116,9 @@ nav .flex_center {
 	padding: 4px 16px;
 	margin: 0px;
 }
+.div_header h2 {
+	text-transform: uppercase;
+}
 .div_header h3 {
 	font-size: 1rem;
 	height: max-content;
@@ -111,22 +126,24 @@ nav .flex_center {
 	flex-grow: 1;
 }
 
+/* --- CONTENT EXTRAS --- */
+.content_section {
+	padding: 4px;
+}
 .fill_viewport {
-	width: 100%;
+	position: relative;
 	height: 100vh;
+	max-width: 100vw;
 }
 .floating_background {
 	position: absolute;
+	z-index: -2;
 	inset: 0px;
 
-	background-image: url("../Graphics/Rise/Rise_Art_1_0_0.webp");
+	background-image: var(--floatingImage);
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
-}
-
-.content_section {
-	padding: 4px;
 }
 
 /* --- PROJECT TAGS --- */
@@ -167,6 +184,147 @@ nav .flex_center {
 	content: "Demo Available";
 }
 
+/* --- STYLE --- */
+.text_slant::before {
+	content: "";
+
+	background: var(--slantBackground);
+	position: absolute;
+	z-index: -1;
+
+	inset: 0px;
+	transform: skew(-5deg);
+}
+.text_slant::after {
+	content: "";
+	
+	background: var(--slantBackground);
+	height: 2px;
+	width: 100%;
+
+	position: absolute;
+	
+	left: -1.5px;
+	bottom: -4px;
+	
+	transform-origin: center right;
+	transform: skew(-5deg);
+}
+.text_slant {
+	position: relative;
+	font-family: "Rajdhani_SemiBold", sans-serif;
+	color: transparent;
+	
+	background: var(--slantText);
+	background-clip: text !important;
+}
+
+
+.floating_major_title_shadow {
+	filter: drop-shadow(0px 2px 4px var(--textShadowColor))
+			drop-shadow(0px 2px 4px var(--textShadowColor));
+}
+.floating_paragraph_shadow {
+	filter: drop-shadow(0px 1px 4px var(--textShadowColor))
+			drop-shadow(0px 1px 4px var(--textShadowColor));
+}
+
+/* --- LIMITED LIST --- */
+.limited_List {
+	display: flex;
+	flex-direction: column;
+
+	padding: 8px 4px;
+	gap: 4px;
+
+	max-height: clamp(320px, 75vh, 786px);
+	overflow-y: scroll;
+}
+.list_item {
+	background-color: var(--themedLighter);
+	box-shadow: 0px 2px 8px hsl(from var(--themedOutline) h s calc(l - 5));
+	
+	border: solid 2px var(--themedOutline);
+	border-radius: 4px;
+	
+	color: white;
+	opacity: 0.5;
+
+	padding: 8px;
+	cursor: pointer;
+
+	position: relative;
+	transition: opacity 0.2s ease;
+}
+.list_item:hover {
+	opacity: 1;
+}
+.list_item h4 {
+	margin: 0px;
+	padding: 4px 0px;
+}
+.list_item h5 {
+	margin: 0px;
+	padding: 4px 0px;
+	font-family: "Rajdhani_Medium", sans-serif;
+}
+
+.tag_list {
+	display: flex;
+	gap: 4px;
+
+	margin-bottom: 4px;
+}
+.news_tag {
+	font-family: "Rajdhani_Medium", sans-serif;
+	font-size: 14px;
+	
+	max-width: max-content;
+}
+
+.news_tag::after {
+	border-radius: 4px;
+	padding: 0px 8px;
+}
+.website::after {
+	content: "Website";
+	
+	background-color: #c30068;
+	color: white;
+	box-shadow: 0px 2px 0px #91008a;
+}
+.frameOfMind::after {
+	content: "Frame of Mind";
+	
+	background-color: #1696ff;
+	color: white;
+	box-shadow: 0px 2px 0px #1650ff;
+}
+.rise::after {
+	content: "Rise";
+	
+	background-color: #7d0093;
+	color: white;
+
+	box-shadow: 0px 2px 0px #36007d;
+}
+.personal::after {
+	content: "Personal";
+	
+	background-color: #00b712;
+	color: white;
+
+	box-shadow: 0px 2px 0px #3d6b00;
+}
+.social::after {
+	content: "Social";
+	
+	background-color: #ff6a00;
+	color: white;
+
+	box-shadow: 0px 2px 0px #ff3d00;
+}
+
 /** AVAILABLE FONTS **
 	- Rajdhani Regular
 	- Rajdhani Medium
@@ -190,7 +348,7 @@ nav .flex_center {
 	src: url('../Fonts/Rajdhani/Rajdhani-Bold.ttf');
 }
 
-@media (max-width: 512px) {
+@media (max-width: 600px) {
 	.div_header {
 		flex-direction: column;
 		gap: 6px;
